@@ -1,4 +1,4 @@
 package com.gestao.estacionamento.model;
 
-public class Estacionamento {
+public class Veiculo {
 }
