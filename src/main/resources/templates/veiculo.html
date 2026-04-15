@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Veiculos</title>
+</head>
+<body>
+<h1>Registo de veiculos</h1>
+<hr>
+<h3 th:text="${mensagem}"></h3>
+
+<table>
+    <tr>
+        <th>Matrícula</th>
+        <th>Hora de entrada</th>
+    </tr>
+
+    <tr th:each="f:${lista}">
+        <th th:text="${f.matricula}"></th>
+        <th th:text="${f.horaEntrada}"></th>
+    </tr>
+</table>
+<h2>Novo veículo</h2>
+<form action="/veiculos" method="post">
+    <input type="text" name="matricula" placeholder="Matrícula">
+    <input type="datetime-local" name="horaEntrada" placeholder="Hora de entrada">
+    <button type="submit">Adicionar</button>
+</form>
+</body>
+</html>
