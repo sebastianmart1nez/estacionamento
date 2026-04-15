@@ -1,31 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="pt">
 <head>
     <meta charset="UTF-8">
-    <title>Veiculos</title>
+    <title>Veículos</title>
 </head>
 <body>
-<h1>Registo de veiculos</h1>
+
+<h1>Registo de Veículos</h1>
 <hr>
+
 <h3 th:text="${mensagem}"></h3>
 
-<table>
+<table border="1">
     <tr>
         <th>Matrícula</th>
-        <th>Hora de entrada</th>
+        <th>Data</th>
+        <th>Hora</th>
     </tr>
 
-    <tr th:each="f:${lista}">
-        <th th:text="${f.matricula}"> </th>
-        <br>
-        <th th:text="${f.horaEntrada}"> </th>
+    <tr th:each="f : ${lista}">
+        <td th:text="${f.matricula}"></td>
+
+        <!-- separa data e hora do datetime-local -->
+        <td th:text="${#strings.substring(f.horaEntrada, 0, 10)}"></td>
+        <td th:text="${#strings.substring(f.horaEntrada, 11, 16)}"></td>
     </tr>
 </table>
+
 <h2>Novo veículo</h2>
+
 <form action="/veiculos" method="post">
-    <input type="text" name="matricula" placeholder="Matrícula">
-    <input type="datetime-local" name="horaEntrada" placeholder="Hora de entrada">
+
+    <input type="text" name="matricula" placeholder="Matrícula" required>
+
+    <input type="datetime-local" name="horaEntrada" required>
+
     <button type="submit">Adicionar</button>
+
 </form>
+
 </body>
 </html>
