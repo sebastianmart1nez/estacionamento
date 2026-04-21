@@ -1,7 +1,7 @@
-function marcarNomes(){
-let nomes = document.querySelectorAll(".coluna.nome");
+function marcarMatricula(){
+let matricula = document.querySelectorAll(".coluna-matricula");
 
-nomes.forEach(function(td){
+matricula.forEach(function(td){
 td.style.backgroundColor="#ffe599"
 })
 
