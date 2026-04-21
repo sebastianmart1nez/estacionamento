@@ -1,1 +1,14 @@
-oi
+body{
+font-family: Arial, sans-serif;
+margin: 20px;
+background-color: #f5f9fc;
+}
+table {
+width: 50%;
+border-collapse: collapse;
+margin-top: 15px;
+}
+
+.destacado {
+background-color: #fff2cc;
+}
