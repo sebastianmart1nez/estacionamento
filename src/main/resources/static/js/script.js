@@ -1,10 +1,9 @@
-function marcarMatricula() {
-const matricula =document.querySelectorAll(".coluna-matricula");
+function marcarNomes(){
+let nomes = document.querySelectorAll(".coluna.nome");
 
-for(let i = 0; i < matricula.length; i++) {
-matricula[i].classList.add('destacado');
-}
-}
+nomes.forEach(function(td){
+td.style.backgroundColor="#ffe599"
+})
 
 function toggleTabela() {
 let tabela=document.getElementById('tabelaVeiculos');
