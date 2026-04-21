@@ -14,7 +14,6 @@ public class Veiculo {
         return matricula;
     }
 
-    public String getHoraEntrada() {
-        return horaEntrada;
-    }
+
+    public String getHoraEntrada() { return horaEntrada; }
 }
