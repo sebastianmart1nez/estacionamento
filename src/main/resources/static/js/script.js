@@ -1,9 +1,9 @@
 function marcarMatricula(){
-let matricula = document.querySelectorAll(".coluna-matricula");
+let matricula = document.querySelectorAll('.coluna-matricula');
 
-matricula.forEach(function(td){
-td.style.backgroundColor="#ffe599"
-})
+for(let i = 0; i < matricula.length; i++) {
+matricula[i].classList.add('destacado');}
+}
 
 function toggleTabela() {
 let tabela=document.getElementById('tabelaVeiculos');
@@ -11,3 +11,4 @@ if (tabela.style.display === 'none') {
 tabela.style.display = 'table';
 } else {
 tabela.style.display = 'none';}
+}
