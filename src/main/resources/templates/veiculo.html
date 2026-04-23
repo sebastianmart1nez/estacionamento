@@ -7,41 +7,50 @@
 </head>
 <body>
 
-<h1>Registo de Veículos</h1>
-<hr>
-<h3 th:text="${mensagem}"></h3>
+<div class="container">
 
-<div id="tabelaVeiculos">
-    <table>
-        <tr>
-            <th>Matrícula</th>
-            <th>Data</th>
-            <th>Hora</th>
-        </tr>
+    <!-- LOGO -->
+    <div class="logo">
+        <img th:src="@{/img/parking_cor.png}" alt="Parking Lot Logo">
+    </div>
 
-        <tr th:each="f : ${lista}">
-            <td class="coluna-matricula" th:text="${f.matricula}"></td>
+    <h1>Registo de Veículos</h1>
 
-            <!-- separa data e hora do datetime-local -->
-            <td th:text="${#strings.substring(f.horaEntrada, 0, 10)}"></td>
-            <td th:text="${#strings.substring(f.horaEntrada, 11, 16)}"></td>
-        </tr>
-    </table>
+    <p class="mensagem" th:text="${mensagem}"></p>
+
+    <hr>
+
+    <div id="tabelaVeiculos">
+        <table>
+            <tr>
+                <th>Matrícula</th>
+                <th>Data</th>
+                <th>Hora</th>
+            </tr>
+
+            <tr th:each="f : ${lista}">
+                <td class="coluna-matricula" th:text="${f.matricula}"></td>
+                <td th:text="${#strings.substring(f.horaEntrada, 0, 10)}"></td>
+                <td th:text="${#strings.substring(f.horaEntrada, 11, 16)}"></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="acoes">
+        <button onclick="toggleTabela()">Mostrar/Esconder</button>
+        <button onclick="marcarMatricula()">Destacar Matrículas</button>
+    </div>
+
+    <h2>Novo veículo</h2>
+
+    <form action="/veiculos" method="post">
+        <input type="text" name="matricula" placeholder="Matrícula" required>
+        <input type="datetime-local" name="horaEntrada" required>
+        <button type="submit">Adicionar</button>
+    </form>
+
 </div>
-<button class="botao" onclick="toggleTabela()">Mostrar/Esconder tabela</button>
-<button class="botao" onclick="marcarMatricula()">Marcar matrículas</button>
 
-<h2>Novo veículo</h2>
-
-<form action="/veiculos" method="post">
-
-    <input type="text" name="matricula" placeholder="Matrícula" required>
-
-    <input type="datetime-local" name="horaEntrada" required>
-
-    <button type="submit">Adicionar</button>
-
-</form>
 <script th:src="@{/js/script.js}"></script>
 </body>
 </html>
