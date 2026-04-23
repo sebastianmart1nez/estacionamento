@@ -1,4 +1,3 @@
-/* 1. Estilo do Body - Foco em Neutralidade */
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     background-color: #ffffff;
@@ -10,7 +9,6 @@ body {
     margin: 0 auto;
 }
 
-/* 2. Estilo do Título - Simples e Direto */
 h1 {
     font-weight: 700;
     font-size: 1.8rem;
@@ -31,7 +29,6 @@ hr {
     margin: 20px 0;
 }
 
-/* 3. Estilo da Tabela - Sem bordas laterais (Estilo Editorial) */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -39,11 +36,10 @@ table {
     font-size: 0.95rem;
 }
 
-/* 4. Estilo do Cabeçalho e 5. Bordas/Espaçamento */
 th {
     text-align: left;
     padding: 12px 8px;
-    border-bottom: 2px solid #1a1a1a; /* Linha de destaque minimalista */
+    border-bottom: 2px solid #1a1a1a;
     font-weight: 600;
     color: #666;
     text-transform: uppercase;
@@ -60,7 +56,6 @@ tr:last-child td {
     border-bottom: none;
 }
 
-/* Estilo do Formulário - Inputs "Clean" */
 form {
     display: flex;
     flex-wrap: wrap;
@@ -71,9 +66,9 @@ form {
 input {
     flex: 1;
     min-width: 150px;
-    padding: 10px 0; /* Apenas padding vertical */
+    padding: 10px 0;
     border: none;
-    border-bottom: 1px solid #ccc; /* Linha única inferior */
+    border-bottom: 1px solid #ccc;
     background: transparent;
     transition: border-color 0.3s;
     font-size: 1rem;
@@ -84,7 +79,6 @@ input:focus {
     border-bottom: 1px solid #1a1a1a;
 }
 
-/* 6. Estilo do Botão - Minimalista e Sólido */
 button {
     background-color: #1a1a1a;
     color: #fff;
@@ -100,16 +94,6 @@ button:hover {
     opacity: 0.8;
 }
 
-/* Mensagem de feedback */
-h3 {
-    font-size: 0.9rem;
-    font-weight: 400;
-    color: #007aff; /* Azul discreto para info */
-    background: #f0f7ff;
-    padding: 10px;
-    border-radius: 4px;
-    display: inline-block;
-}
 .destacado {
 background-color: #fff2cc;
 }
