@@ -28,7 +28,7 @@ public class VeiculoControler {
     }
 @PostMapping("/veiculos")
     public String adicionarVeiculo(@RequestParam String matricula, @RequestParam String horaEntrada) {
-        repository.save(new Veiculo(matricula, horaEntrada));
+        repository.save(new Veiculo(null, matricula, horaEntrada));
         return "redirect:/veiculos";
     }
 }
