@@ -1,4 +1,7 @@
 package com.gestao.estacionamento.repository;
 
-public interface ComprovativoRepository {
+import com.gestao.estacionamento.model.Comprovativo;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ComprovativoRepository extends JpaRepository<Comprovativo, Long> {
 }
