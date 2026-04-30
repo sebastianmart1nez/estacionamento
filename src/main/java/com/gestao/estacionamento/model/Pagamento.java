@@ -1,9 +1,6 @@
 package com.gestao.estacionamento.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,4 +21,13 @@ public class Pagamento {
    private double valor;
    private LocalDate dataPagamento;
    private String metodoPagamento;
+
+
+   @OneToOne
+   @JoinColumn(name = "idEstacionamento")
+   private Estacionamento estacionamento;
+
+   @OneToOne(mappedBy = "pagamento")
+   private Comprovativo comprovativo;
 }
+

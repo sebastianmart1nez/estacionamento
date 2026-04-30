@@ -33,7 +33,7 @@ public class VeiculoController {
     @PostMapping("/veiculos")
     public String adicionarVeiculo(@RequestParam String matricula, @RequestParam String horaEntrada) {
 
-        Veiculo veiculo = new Veiculo(null , matricula, horaEntrada);
+        Veiculo veiculo = new Veiculo(null , matricula, horaEntrada, null);
         service.guardar(veiculo);
         return "redirect:/veiculos";
     }

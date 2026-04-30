@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 /**
  * Entidade que representa um veículo no sistema.
  */
@@ -25,4 +27,8 @@ public class Veiculo {
      * Em contexto real, deve ser LocalDateTime.
      */
     private String horaEntrada;
+
+   @ManyToOne
+    @JoinColumn(name = "idCliente")
+    private Cliente cliente;
 }

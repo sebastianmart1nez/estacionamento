@@ -1,12 +1,11 @@
 package com.gestao.estacionamento.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -19,4 +18,7 @@ public class Vaga {
     private Long numeroVaga;
 
     private String disponivel;
+
+    @OneToMany
+    private List<Estacionamento> estacionamentos;
 }

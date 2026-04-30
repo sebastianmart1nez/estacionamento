@@ -1,12 +1,11 @@
 package com.gestao.estacionamento.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -21,4 +20,7 @@ public class Cliente {
     private String nome;
     private String contacto;
     private String email;
+
+    @OneToMany(mappedBy = "cliente")
+    private List<Veiculo> veiculos;
 }
