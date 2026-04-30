@@ -31,10 +31,10 @@ public class VeiculoController {
     }
 
     @PostMapping("/veiculos")
-    public String adicionarVeiculo(@RequestParam String matricula,
-                            @RequestParam String horaEntrada) {
-        Veiculo veiculo = (new Veiculo(null, matricula, horaEntrada, null));
-        veiculoService.guardar(matricula, horaEntrada);
+    public String adicionarVeiculo(@RequestParam String matricula, @RequestParam String horaEntrada) {
+
+        Veiculo veiculo = new Veiculo(null , matricula, horaEntrada);
+        service.guardar(veiculo);
         return "redirect:/veiculos";
     }
 }
