@@ -2,55 +2,84 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="pt">
 <head>
     <meta charset="UTF-8">
-    <title>Veículos</title>
+    <title>Sistema de Gestão de Estacionamento</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
+
 <body>
 
 <div class="container">
 
-    <!-- LOGO -->
-    <div class="logo">
-        <img th:src="@{/img/parking_cor.png}" alt="Parking Lot Logo">
-    </div>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="title-block">
+            <div class="logo">P</div>
+            <div>
+                <h1>Sistema de Gestão de Estacionamento</h1>
+                <p class="subtitle">Tarifa: 1.50€/hora | Mínimo: 30 minutos</p>
+            </div>
+        </div>
+    </header>
 
-    <h1>Registo de Veículos</h1>
+    <!-- DASHBOARD CARDS -->
+    <section class="grid">
 
-    <p class="mensagem" th:text="${mensagem}"></p>
+        <div class="card">
+            <div>
+                <p class="label">Vagas Disponíveis</p>
+                <h2 class="value green" th:text="${vagasDisponiveis}">50</h2>
+                <span class="small">de 50 totais</span>
+            </div>
+            <div class="icon green-bg">P</div>
+        </div>
 
-    <hr>
+        <div class="card">
+            <div>
+                <p class="label">Vagas Ocupadas</p>
+                <h2 class="value orange" th:text="${vagasOcupadas}">0</h2>
+                <span class="small">0% ocupação</span>
+            </div>
+            <div class="icon orange-bg">🚗</div>
+        </div>
 
-    <div id="tabelaVeiculos">
-        <table>
-            <tr>
-                <th>Matrícula</th>
-                <th>Data</th>
-                <th>Hora</th>
-            </tr>
+        <div class="card">
+            <div>
+                <p class="label">Veículos Hoje</p>
+                <h2 class="value blue" th:text="${veiculosHoje}">0</h2>
+                <span class="small">Total processados</span>
+            </div>
+            <div class="icon blue-bg">🕒</div>
+        </div>
 
-            <tr th:each="f : ${lista}">
-                <td class="coluna-matricula" th:text="${f.matricula}"></td>
-                <td th:text="${#strings.substring(f.horaEntrada, 0, 10)}"></td>
-                <td th:text="${#strings.substring(f.horaEntrada, 11, 16)}"></td>
-            </tr>
-        </table>
-    </div>
+        <div class="card">
+            <div>
+                <p class="label">Receita Total</p>
+                <h2 class="value purple" th:text="${receitaHoje}">0.00€</h2>
+                <span class="small">Acumulado hoje</span>
+            </div>
+            <div class="icon purple-bg">€</div>
+        </div>
 
-    <div class="acoes">
-        <button onclick="toggleTabela()">Mostrar/Esconder</button>
-        <button onclick="marcarMatricula()">Destacar Matrículas</button>
-    </div>
+    </section>
 
-    <h2>Novo veículo</h2>
+    <!-- FORM -->
+    <section class="card form-card">
 
-    <form action="/veiculos" method="post">
-        <input type="text" name="matricula" placeholder="Matrícula" required>
-        <input type="datetime-local" name="horaEntrada" required>
-        <button type="submit">Adicionar</button>
-    </form>
+        <h3>Registar Entrada</h3>
+
+        <form action="/veiculos" method="post" class="form">
+            <input type="text" name="matricula" placeholder="Matrícula (ex: 00-AA-00)" required>
+            <input type="datetime-local" name="horaEntrada" required>
+            <button type="submit">Adicionar</button>
+        </form>
+
+    </section>
 
 </div>
 
+<script th:src="@{/js/script.js}"></script>
+</body>
+</html>
 <script th:src="@{/js/script.js}"></script>
 </body>
 </html>

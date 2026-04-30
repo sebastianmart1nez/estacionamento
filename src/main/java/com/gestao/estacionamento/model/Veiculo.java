@@ -1,13 +1,13 @@
 package com.gestao.estacionamento.model;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
+/**
+ * Entidade que representa um veículo no sistema.
+ */
 @Entity
 @Data
 @NoArgsConstructor
@@ -17,8 +17,12 @@ public class Veiculo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String matricula;
+
+    /**
+     * Guardado como String por simplicidade.
+     * Em contexto real, deve ser LocalDateTime.
+     */
     private String horaEntrada;
-
-
 }
