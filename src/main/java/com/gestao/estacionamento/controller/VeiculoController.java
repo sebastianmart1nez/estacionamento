@@ -1,5 +1,6 @@
 package com.gestao.estacionamento.controller;
 
+import com.gestao.estacionamento.model.Veiculo;
 import com.gestao.estacionamento.service.VeiculoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,10 +31,10 @@ public class VeiculoController {
     }
 
     @PostMapping("/veiculos")
-    public String adicionar(@RequestParam String matricula,
+    public String adicionarVeiculo(@RequestParam String matricula,
                             @RequestParam String horaEntrada) {
-
-        service.adicionar(matricula, horaEntrada);
+        Veiculo veiculo = (new Veiculo(null, matricula, horaEntrada, null));
+        veiculoService.guardar(matricula, horaEntrada);
         return "redirect:/veiculos";
     }
 }

@@ -15,10 +15,12 @@ public class VeiculoService {
     private final VeiculoRepository repository;
 
     public VeiculoService(VeiculoRepository repository) {
+
         this.repository = repository;
     }
 
     public List<Veiculo> listarTodos() {
+
         return repository.findAll();
     }
 
@@ -27,6 +29,10 @@ public class VeiculoService {
         v.setMatricula(matricula);
         v.setHoraEntrada(horaEntrada);
         repository.save(v);
+    }
+
+    public void guardar(Veiculo veiculo){
+        repository.save(veiculo);
     }
 
     public int getVagasOcupadas() {
