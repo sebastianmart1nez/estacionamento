@@ -1,10 +1,97 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html xmlns:th="http://www.thymeleaf.org" lang="pt">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Gestão de Pagamentos</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
-<body>
 
+<body>
+<nav>
+    <a href="/">Inicio</a>
+    <a href="/veiculos">Veiculos</a>
+    <a href=""></a>
+    <a href=""></a>
+    <a href=""></a>
+</nav>
+<div class="container">
+    <header class="header">
+        <div class="titulo">
+            <h1>Gestão de Dividas</h1>
+        </div>
+    </header>
+
+    <section class="grid">
+        <div class="card">
+            <div>
+                <p class="label">Total Pagamentos</p>
+                <h2 class="value green" th:text="${totalPagamentos}">0</h2>
+                <span class="small">Registados no Sistema</span>
+            </div>
+            <div class="icon green-bg">€</div>
+        </div>
+        <div class="card">
+            <div>
+                <p class="label">Receita Hoje</p>
+                <h2 class="value orange" th:text="${receitaHoje}">0.00€</h2>
+                <span class="small">Acumulado hoje</span>
+            </div>
+            <div class="icon orange-bg"></div>
+        </div>
+
+        <div class="card">
+            <div>
+                <p class="label">Pagamentos Pendentes</p>
+                <h2 class="value purple" th:text="${valorMedio}">0.00€</h2>
+                <span class="small">Por pagamento</span>
+            </div>
+            <div class="icon purple-bg"></div>
+        </div>
+    </section>
+
+    <section class="card form-card">
+        <h3>Registar Pagamento</h3>
+        <form action="/pagamentos" method="post" class="form">
+            <input type="text" name="matricula" placeholder="Matricula (ex: 00-AA-00)" required>
+            <input type="number" name="valor" placeholder="Valor (€)" step="0.01" min="0" required>
+            <select name="metodoPagamento" required>
+                <option value="" disabled selected>Método de Pagamento</option>
+                <option value="dinheiro">Dinheiro</option>
+                <option value="cartao">Cartao</option>
+                <option value="mbway">MBWay</option>
+                <option value="transferencia">Transferencia</option>
+            </select>
+            <button type="submit">Registar</button>
+        </form>
+    </section>
+
+    <section class="card form-card" style="margin-top: 20px;">
+        <h3>Histórico de Pagamentos</h3>
+        <table class="table" th:if="${not #lists.isEmpty(lista)}">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Matrícula</th>
+                <th>Valor</th>
+                <th>Método</th>
+                <th>Data</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="p : ${lista}">
+                <td th:text="${p.idPagamento}">1</td>
+                <td th:text="${p.estacionamento?.matricula}">00-AA-00</td>
+                <td th:text="${p.valor} + '€'">1.50€</td>
+                <td th:text="${p.metodoPagamento}">Cartao</td>
+                <td th:text="${p.dataPagamento}">2026-01-01</td>
+            </tr>
+            </tbody>
+        </table>
+        <p th:if="${#lists.isEmpty(lista)}" class="small" style="text-align: center; padding: 20px;">
+            Nenhum pagamento registado.
+        </p>
+    </section>
+</div>
+<script th:src="@{/js/script.js}"></script>
 </body>
 </html>
