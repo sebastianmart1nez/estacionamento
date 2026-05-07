@@ -17,7 +17,6 @@ public class Pagamento {
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Long idPagamento;
 
-   private Long idEstacionamento;
    private double valor;
    private LocalDate dataPagamento;
    private String metodoPagamento;

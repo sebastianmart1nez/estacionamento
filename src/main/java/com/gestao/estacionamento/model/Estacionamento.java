@@ -18,8 +18,6 @@ public class Estacionamento {
     private Long idEstacionamento;
 
     private String matricula;
-    private Long idVaga;
-    private Long idFuncionario;
     private LocalTime horaEntrada;
     private LocalTime horaSaida;
     private LocalTime tempoPermanencia;

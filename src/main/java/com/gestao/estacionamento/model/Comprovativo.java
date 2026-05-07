@@ -17,7 +17,6 @@ public class Comprovativo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idComprovativo;
 
-    private Long idPagamento;
     private LocalDate dataEmissao;
 
     @OneToOne
