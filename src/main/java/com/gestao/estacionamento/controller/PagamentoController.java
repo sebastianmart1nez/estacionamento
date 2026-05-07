@@ -33,6 +33,7 @@ public class PagamentoController {
         public String registarPagamento (@RequestParam String matricula, @RequestParam double valor,
         @RequestParam String metodoPagamento) {
             Pagamento pagamento = new Pagamento();
+            pagamento.setMatricula(matricula);
             pagamento.setValor(valor);
             pagamento.setDataPagamento(LocalDate.now());
             pagamento.setMetodoPagamento(metodoPagamento);

@@ -90,7 +90,7 @@
             <tbody>
             <tr th:each="p : ${lista}">
                 <td th:text="${p.idPagamento}">1</td>
-                <td th:text="${p.estacionamento?.matricula}">00-AA-00</td>
+                <td th:text="${p.matricula}">00-AA-00</td>
                 <td th:text="${p.valor} + '€'">1.50€</td>
                 <td th:text="${p.metodoPagamento}">Cartao</td>
                 <td th:text="${p.dataPagamento}">2026-01-01</td>
