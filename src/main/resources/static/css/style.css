@@ -25,6 +25,27 @@ body {
     padding: 30px;
 }
 
+/* NAVBAR */
+nav {
+    background: white;
+    padding: 15px 30px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+nav a:hover {
+    color: var(--blue);
+}
+
 /* HEADER */
 .header {
     margin-bottom: 25px;
@@ -75,6 +96,28 @@ h1 {
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    transition: 0.2s;
+}
+
+/* CARDS LINKS DO INDEX */
+.cards {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.cards .card {
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 600;
+    justify-content: center;
+    min-height: 100px;
+}
+
+.cards .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.08);
 }
 
 /* TEXTOS */
@@ -113,10 +156,25 @@ h1 {
 }
 
 /* BACKGROUND ICONS */
-.green-bg { background: #dcfce7; color: var(--green); }
-.orange-bg { background: #ffedd5; color: var(--orange); }
-.blue-bg { background: #dbeafe; color: var(--blue); }
-.purple-bg { background: #f3e8ff; color: var(--purple); }
+.green-bg {
+    background: #dcfce7;
+    color: var(--green);
+}
+
+.orange-bg {
+    background: #ffedd5;
+    color: var(--orange);
+}
+
+.blue-bg {
+    background: #dbeafe;
+    color: var(--blue);
+}
+
+.purple-bg {
+    background: #f3e8ff;
+    color: var(--purple);
+}
 
 /* FORM CARD */
 .form-card {
@@ -136,8 +194,14 @@ input {
     padding: 12px;
     border-radius: 10px;
     border: 1px solid #e2e8f0;
+    outline: none;
 }
 
+input:focus {
+    border-color: var(--blue);
+}
+
+/* BUTTON */
 button {
     background: #1e3a8a;
     color: white;
@@ -145,8 +209,29 @@ button {
     padding: 12px 16px;
     border-radius: 10px;
     cursor: pointer;
+    transition: 0.2s;
 }
 
 button:hover {
     opacity: 0.9;
+}
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form {
+        flex-direction: column;
+    }
+
+    nav {
+        flex-wrap: wrap;
+    }
+
+    .container {
+        padding: 20px;
+    }
 }
