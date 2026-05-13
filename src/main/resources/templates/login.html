@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<h1>Login</h1>
+<p th:if="${erro}"
+   th:text="${erro}"
+   class="erro"></p>
+<form action="/login" method="post">
+  <input type="email" name="email" placeholder="Escreva o email" required>
+  <input type="password" name="senha" placeholder="Escreva a senha" required>
+  <button type="submit">Entrar</button>
+</form>
+</body>
+</html>
