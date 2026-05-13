@@ -3,6 +3,7 @@ package com.gestao.estacionamento.controller;
 import com.gestao.estacionamento.model.Utilizador;
 import com.gestao.estacionamento.service.UtilizadorService;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,21 +47,21 @@ public class UtilizadorController {
     public String fazerLogin(
             @RequestParam String email,
             @RequestParam String password,
+            HttpSession session,
             Model model) {
+        Utilizador utilizador=service.validarLogin(email,password);
 
-        boolean loginValido =
-                service.validarLogin(email, password);
 
-        if (loginValido) {
+        if (utilizador != null) {
+            session.setAttribute("utilizadorLogado",utilizador);
+            return "redirect:/";
+        }
 
-            model.addAttribute("mensagem",
-                    "Login efetuado com sucesso!");
 
-        } else {
 
             model.addAttribute("erro",
                     "Username ou password incorretos!");
-        }
+
 
         return "login";
     }

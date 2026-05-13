@@ -23,20 +23,11 @@ public class UtilizadorService {
         return repository.findAll();
     }
 
-    // procurar username
-    public Utilizador procurarPorUsername(String username) {
-        return repository.findbyUsername(username);
-    }
+
 
     // validar login
-    public boolean validarLogin(String email, String password) {
+    public Utilizador validarLogin(String email, String password) {
 
-        Utilizador utilizador = repository.findByEmail(email,password);
-
-        if (utilizador == null) {
-            return false;
-        }
-
-        return utilizador.getPassword().equals(password);
+        return repository.findByEmail(email,password);
     }
 }
