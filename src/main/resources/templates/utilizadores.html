@@ -17,19 +17,12 @@
 
 <h1>Gestão de Utilizadores</h1>
 
-<form th:action="@{/guardarUtilizador}"
-      th:object="${utilizador}"
-      method="post">
+<form action="/utilizadores" method="post">
+    <input type="text" name="username" placeholder="Nome" required>
+    <input type="email" name="email" placeholder="email" required>
+    <input type="password" name="password" placeholder="Password" required>
 
-    <input type="text"
-           th:field="*{username}"
-           placeholder="Username" required>
-
-    <input type="password"
-           th:field="*{password}"
-           placeholder="Password" required>
-
-    <select th:field="*{perfil}">
+    <select name="perfil">
         <option value="ADMIN">ADMIN</option>
         <option value="FUNCIONARIO">FUNCIONARIO</option>
         <option value="CLIENTE">CLIENTE</option>

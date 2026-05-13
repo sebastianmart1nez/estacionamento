@@ -28,8 +28,7 @@ public class UtilizadorController {
 
     // guardar utilizador
     @PostMapping("/guardarUtilizador")
-    public String guardarUtilizador(
-            @ModelAttribute Utilizador utilizador) {
+    public String guardarUtilizador(Utilizador utilizador) {
 
         service.guardar(utilizador);
 
@@ -45,12 +44,12 @@ public class UtilizadorController {
     // validar login
     @PostMapping("/login")
     public String fazerLogin(
-            @RequestParam String username,
+            @RequestParam String email,
             @RequestParam String password,
             Model model) {
 
         boolean loginValido =
-                service.validarLogin(username, password);
+                service.validarLogin(email, password);
 
         if (loginValido) {
 
