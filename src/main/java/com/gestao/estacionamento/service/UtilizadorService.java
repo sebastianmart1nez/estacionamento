@@ -25,13 +25,13 @@ public class UtilizadorService {
 
     // procurar username
     public Utilizador procurarPorUsername(String username) {
-        return repository.findByUsername(username);
+        return repository.findbyUsername(username);
     }
 
     // validar login
-    public boolean validarLogin(String username, String password) {
+    public boolean validarLogin(String email, String password) {
 
-        Utilizador utilizador = repository.findByUsername(username);
+        Utilizador utilizador = repository.findByEmail(email,password);
 
         if (utilizador == null) {
             return false;
