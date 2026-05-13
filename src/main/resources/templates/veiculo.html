@@ -127,10 +127,12 @@
 
     </section>
 
+    <!-- FORMULÁRIO -->
     <section class="card form-card">
 
         <div class="section-header">
             <h3>Registar Entrada</h3>
+
             <p class="small">
                 Adicione um veículo ao sistema
             </p>
@@ -154,6 +156,65 @@
             </button>
 
         </form>
+
+    </section>
+
+    <!-- TABELA -->
+    <section class="card tabela-card">
+
+        <div class="section-header">
+
+            <div>
+                <h3>Veículos Registados</h3>
+
+                <p class="small">
+                    Lista de veículos atualmente estacionados
+                </p>
+            </div>
+
+        </div>
+
+        <div class="table-responsive">
+
+            <table class="table">
+
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Matrícula</th>
+                    <th>Hora de Entrada</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+                <tr th:each="veiculo : ${lista}">
+
+                    <td th:text="${veiculo.id}">1</td>
+
+                    <td th:text="${veiculo.matricula}">
+                        00-AA-00
+                    </td>
+
+                    <td th:text="${veiculo.horaEntrada}">
+                        2026-05-11T10:00
+                    </td>
+
+                </tr>
+
+                <tr th:if="${#lists.isEmpty(lista)}">
+
+                    <td colspan="3" class="empty-table">
+                        Nenhum veículo registado
+                    </td>
+
+                </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
 
     </section>
 

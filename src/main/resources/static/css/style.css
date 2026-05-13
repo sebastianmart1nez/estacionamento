@@ -453,4 +453,83 @@ select:focus {
         display: block;
         overflow-x: auto;
     }
+    /* SECTION HEADER */
+    .section-header {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .section-header h3 {
+        margin: 0;
+        font-size: 22px;
+        color: var(--blue-dark);
+    }
+
+    /* TABELA CARD */
+    .tabela-card {
+        margin-top: 25px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    /* TABLE RESPONSIVE */
+    .table-responsive {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    /* TABLE */
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+    }
+
+    .table thead {
+        background: var(--blue-light);
+    }
+
+    .table th,
+    .table td {
+        padding: 16px;
+        text-align: left;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .table th {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--blue-dark);
+    }
+
+    .table td {
+        font-size: 14px;
+    }
+
+    .table tbody tr {
+        transition: background 0.2s ease;
+    }
+
+    .table tbody tr:hover {
+        background: rgba(37, 99, 235, 0.04);
+    }
+
+    /* EMPTY TABLE */
+    .empty-table {
+        text-align: center;
+        color: var(--muted);
+        padding: 30px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+
+        .table th,
+        .table td {
+            min-width: 140px;
+        }
+
+    }
 }

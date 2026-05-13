@@ -6,9 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-/**
- * Controlador responsável pelas rotas da aplicação.
- */
 @Controller
 public class VeiculoController {
 
@@ -22,19 +19,45 @@ public class VeiculoController {
     public String listar(Model model) {
 
         model.addAttribute("lista", service.listarTodos());
-        model.addAttribute("vagasDisponiveis", service.getVagasDisponiveis());
-        model.addAttribute("vagasOcupadas", service.getVagasOcupadas());
-        model.addAttribute("veiculosHoje", service.getTotalHoje());
-        model.addAttribute("receitaHoje", service.calcularReceita());
+
+        model.addAttribute(
+                "vagasDisponiveis",
+                service.getVagasDisponiveis()
+        );
+
+        model.addAttribute(
+                "vagasOcupadas",
+                service.getVagasOcupadas()
+        );
+
+        model.addAttribute(
+                "veiculosHoje",
+                service.getTotalHoje()
+        );
+
+        model.addAttribute(
+                "receitaHoje",
+                service.calcularReceita()
+        );
 
         return "veiculo";
     }
 
     @PostMapping("/veiculos")
-    public String adicionarVeiculo(@RequestParam String matricula, @RequestParam String horaEntrada) {
+    public String adicionarVeiculo(
+            @RequestParam String matricula,
+            @RequestParam String horaEntrada
+    ) {
 
-        Veiculo veiculo = new Veiculo(null , matricula, horaEntrada, null);
+        Veiculo veiculo = new Veiculo(
+                null,
+                matricula,
+                horaEntrada,
+                null
+        );
+
         service.guardar(veiculo);
+
         return "redirect:/veiculos";
     }
 }
