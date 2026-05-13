@@ -532,4 +532,72 @@ select:focus {
         }
 
     }
+    body {
+        font-family: Arial;
+        margin: 20px;
+        background-color: #f4f4f4;
+    }
+
+    nav {
+        background-color: #333;
+        padding: 10px;
+    }
+
+    nav a {
+        color: white;
+        margin-right: 15px;
+        text-decoration: none;
+    }
+
+    h1 {
+        color: #222;
+    }
+
+    form {
+        background: white;
+        padding: 20px;
+        width: 300px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+
+    input, select {
+        width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+    }
+
+    button {
+        margin-top: 15px;
+        padding: 10px;
+        width: 100%;
+        background-color: #007BFF;
+        color: white;
+        border: none;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    table {
+        width: 100%;
+        background: white;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        border: 1px solid #ccc;
+        padding: 10px;
+    }
+
+    .sucesso {
+        color: green;
+        font-weight: bold;
+    }
+
+    .erro {
+        color: red;
+        font-weight: bold;
+    }
 }
