@@ -1,88 +1,163 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="pt">
+
 <head>
     <meta charset="UTF-8">
-    <title>Sistema de Gestão de Estacionamento</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Gestão de Veículos</title>
+
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
 <body>
-<nav>
-    <a href="/">Inicio</a>
-    <a href="/veiculos">Veiculos</a>
-    <a href=""></a>
-    <a href=""></a>
-    <a href=""></a>
-</nav>
-<div class="container">
 
-    <!-- HEADER -->
+<nav>
+
+    <div class="nav-logo">
+        <div class="logo">P</div>
+        <span>ParkSystem</span>
+    </div>
+
+    <div class="nav-links">
+        <a href="/">Início</a>
+        <a href="/veiculos" class="active">Veículos</a>
+        <a href="/pagamentos">Pagamentos</a>
+    </div>
+
+</nav>
+
+<main class="container">
+
     <header class="header">
+
         <div class="title-block">
-            <div class="logo">P</div>
+
+            <div class="logo">🚗</div>
+
             <div>
-                <h1>Sistema de Gestão de Estacionamento</h1>
-                <p class="subtitle">Tarifa: 1.50€/hora | Mínimo: 30 minutos</p>
+                <h1>Gestão de Estacionamento</h1>
+
+                <p class="subtitle">
+                    Tarifa: 1.50€/hora | Mínimo: 30 minutos
+                </p>
             </div>
+
         </div>
+
     </header>
 
-    <!-- DASHBOARD CARDS -->
     <section class="grid">
 
-        <div class="card">
+        <article class="card">
+
             <div>
                 <p class="label">Vagas Disponíveis</p>
-                <h2 class="value green" th:text="${vagasDisponiveis}">50</h2>
-                <span class="small">de 50 totais</span>
-            </div>
-            <div class="icon green-bg">P</div>
-        </div>
 
-        <div class="card">
+                <h2 class="value green"
+                    th:text="${vagasDisponiveis}">
+                    50
+                </h2>
+
+                <span class="small">
+                    de 50 totais
+                </span>
+            </div>
+
+            <div class="icon green-bg">P</div>
+
+        </article>
+
+        <article class="card">
+
             <div>
                 <p class="label">Vagas Ocupadas</p>
-                <h2 class="value orange" th:text="${vagasOcupadas}">0</h2>
-                <span class="small">0% ocupação</span>
-            </div>
-            <div class="icon orange-bg">🚗</div>
-        </div>
 
-        <div class="card">
+                <h2 class="value orange"
+                    th:text="${vagasOcupadas}">
+                    0
+                </h2>
+
+                <span class="small">
+                    Ocupação atual
+                </span>
+            </div>
+
+            <div class="icon orange-bg">🚗</div>
+
+        </article>
+
+        <article class="card">
+
             <div>
                 <p class="label">Veículos Hoje</p>
-                <h2 class="value blue" th:text="${veiculosHoje}">0</h2>
-                <span class="small">Total processados</span>
-            </div>
-            <div class="icon blue-bg">🕒</div>
-        </div>
 
-        <div class="card">
+                <h2 class="value blue"
+                    th:text="${veiculosHoje}">
+                    0
+                </h2>
+
+                <span class="small">
+                    Total processado
+                </span>
+            </div>
+
+            <div class="icon blue-bg">🕒</div>
+
+        </article>
+
+        <article class="card">
+
             <div>
                 <p class="label">Receita Total</p>
-                <h2 class="value purple" th:text="${receitaHoje}">0.00€</h2>
-                <span class="small">Acumulado hoje</span>
+
+                <h2 class="value purple"
+                    th:text="${receitaHoje}">
+                    0.00€
+                </h2>
+
+                <span class="small">
+                    Receita diária
+                </span>
             </div>
+
             <div class="icon purple-bg">€</div>
-        </div>
+
+        </article>
 
     </section>
 
-    <!-- FORM -->
     <section class="card form-card">
 
-        <h3>Registar Entrada</h3>
+        <div class="section-header">
+            <h3>Registar Entrada</h3>
+            <p class="small">
+                Adicione um veículo ao sistema
+            </p>
+        </div>
 
-        <form action="/veiculos" method="post" class="form">
-            <input type="text" name="matricula" placeholder="Matrícula (ex: 00-AA-00)" required>
-            <input type="datetime-local" name="horaEntrada" required>
-            <button type="submit">Adicionar</button>
+        <form action="/veiculos"
+              method="post"
+              class="form">
+
+            <input type="text"
+                   name="matricula"
+                   placeholder="Matrícula (00-AA-00)"
+                   required>
+
+            <input type="datetime-local"
+                   name="horaEntrada"
+                   required>
+
+            <button type="submit">
+                Adicionar
+            </button>
+
         </form>
 
     </section>
 
-</div>
+</main>
 
-<script th:src="@{/js/script.js}"></script>
 </body>
 </html>

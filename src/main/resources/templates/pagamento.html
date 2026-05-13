@@ -1,107 +1,260 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="pt">
+
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
     <title>Gestão de Pagamentos</title>
+
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
 <body>
+
 <nav>
-    <a href="/">Inicio</a>
-    <a href="/veiculos">Veiculos</a>
-    <a href=""></a>
-    <a href=""></a>
-    <a href=""></a>
+
+    <div class="nav-logo">
+        <div class="logo">P</div>
+        <span>ParkSystem</span>
+    </div>
+
+    <div class="nav-links">
+        <a href="/">Início</a>
+        <a href="/veiculos">Veículos</a>
+        <a href="/pagamentos" class="active">
+            Pagamentos
+        </a>
+    </div>
+
 </nav>
-<div class="container">
+
+<main class="container">
+
     <header class="header">
-        <div class="titulo">
-            <h1>Gestão de Dividas</h1>
+
+        <div class="title-block">
+
+            <div class="logo">€</div>
+
+            <div>
+                <h1>Gestão de Pagamentos</h1>
+
+                <p class="subtitle">
+                    Controlo financeiro do estacionamento
+                </p>
+            </div>
+
         </div>
+
     </header>
 
     <section class="grid">
-        <div class="card">
+
+        <article class="card">
+
             <div>
                 <p class="label">Total Pagamentos</p>
-                <h2 class="value green" th:text="${totalPagamentos}">0</h2>
-                <span class="small">Registados no Sistema</span>
+
+                <h2 class="value green"
+                    th:text="${totalPagamentos}">
+                    0
+                </h2>
+
+                <span class="small">
+                    Registados no sistema
+                </span>
             </div>
+
             <div class="icon green-bg">€</div>
-        </div>
-        <div class="card">
+
+        </article>
+
+        <article class="card">
+
             <div>
                 <p class="label">Receita Hoje</p>
-                <h2 class="value orange" th:text="${receitaHoje}">0.00€</h2>
-                <span class="small">Acumulado hoje</span>
-            </div>
-            <div class="icon orange-bg"></div>
-        </div>
 
-        <div class="card">
+                <h2 class="value orange"
+                    th:text="${receitaHoje}">
+                    0.00€
+                </h2>
+
+                <span class="small">
+                    Receita diária
+                </span>
+            </div>
+
+            <div class="icon orange-bg">📈</div>
+
+        </article>
+
+        <article class="card">
+
             <div>
                 <p class="label">Pagamentos Pendentes</p>
-                <h2 class="value purple" th:text="${valorMedio}">0.00€</h2>
-                <span class="small">Por pagamento</span>
-            </div>
-            <div class="icon purple-bg"></div>
-        </div>
 
-        <div class="card">
+                <h2 class="value blue"
+                    th:text="${pagamentosPendentes}">
+                    0
+                </h2>
+
+                <span class="small">
+                    Ainda por liquidar
+                </span>
+            </div>
+
+            <div class="icon blue-bg">⏳</div>
+
+        </article>
+
+        <article class="card">
+
             <div>
                 <p class="label">Valor Médio</p>
-                <h2 class="value purple" th:text="${valorMedio}">0.00€</h2>
-                <span class="small">Por pagamento</span>
+
+                <h2 class="value purple"
+                    th:text="${valorMedio}">
+                    0.00€
+                </h2>
+
+                <span class="small">
+                    Média por pagamento
+                </span>
             </div>
-            <div class="icon purple-bg"></div>
-        </div>
+
+            <div class="icon purple-bg">💳</div>
+
+        </article>
 
     </section>
 
     <section class="card form-card">
-        <h3>Registar Pagamento</h3>
-        <form action="/pagamentos" method="post" class="form">
-            <input type="text" name="matricula" placeholder="Matricula (ex: 00-AA-00)" required>
-            <input type="number" name="valor" placeholder="Valor (€)" step="0.01" min="0" required>
+
+        <div class="section-header">
+            <h3>Registar Pagamento</h3>
+
+            <p class="small">
+                Registe pagamentos manualmente
+            </p>
+        </div>
+
+        <form action="/pagamentos"
+              method="post"
+              class="form">
+
+            <input type="text"
+                   name="matricula"
+                   placeholder="Matrícula"
+                   required>
+
+            <input type="number"
+                   name="valor"
+                   placeholder="Valor (€)"
+                   step="0.01"
+                   min="0"
+                   required>
+
             <select name="metodoPagamento" required>
-                <option value="" disabled selected>Método de Pagamento</option>
-                <option value="dinheiro">Dinheiro</option>
-                <option value="cartao">Cartao</option>
-                <option value="mbway">MBWay</option>
-                <option value="transferencia">Transferencia</option>
+
+                <option disabled selected>
+                    Método de pagamento
+                </option>
+
+                <option value="dinheiro">
+                    Dinheiro
+                </option>
+
+                <option value="cartao">
+                    Cartão
+                </option>
+
+                <option value="mbway">
+                    MBWay
+                </option>
+
+                <option value="transferencia">
+                    Transferência
+                </option>
+
             </select>
-            <button type="submit">Registar</button>
+
+            <button type="submit">
+                Registar
+            </button>
+
         </form>
+
     </section>
 
-    <section class="card form-card" style="margin-top: 20px;">
-        <h3>Histórico de Pagamentos</h3>
-        <table class="table" th:if="${not #lists.isEmpty(lista)}">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Matrícula</th>
-                <th>Valor</th>
-                <th>Método</th>
-                <th>Data</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="p : ${lista}">
-                <td th:text="${p.idPagamento}">1</td>
-                <td th:text="${p.matricula}">00-AA-00</td>
-                <td th:text="${p.valor} + '€'">1.50€</td>
-                <td th:text="${p.metodoPagamento}">Cartao</td>
-                <td th:text="${p.dataPagamento}">2026-01-01</td>
-            </tr>
-            </tbody>
-        </table>
-        <p th:if="${#lists.isEmpty(lista)}" class="small" style="text-align: center; padding: 20px;">
+    <section class="card form-card">
+
+        <div class="section-header">
+            <h3>Histórico de Pagamentos</h3>
+
+            <p class="small">
+                Lista completa de pagamentos
+            </p>
+        </div>
+
+        <div class="table-wrapper">
+
+            <table class="table"
+                   th:if="${not #lists.isEmpty(lista)}">
+
+                <thead>
+
+                <tr>
+                    <th>ID</th>
+                    <th>Matrícula</th>
+                    <th>Valor</th>
+                    <th>Método</th>
+                    <th>Data</th>
+                </tr>
+
+                </thead>
+
+                <tbody>
+
+                <tr th:each="p : ${lista}">
+
+                    <td th:text="${p.idPagamento}">1</td>
+
+                    <td th:text="${p.matricula}">
+                        00-AA-00
+                    </td>
+
+                    <td th:text="${p.valor} + '€'">
+                        1.50€
+                    </td>
+
+                    <td th:text="${p.metodoPagamento}">
+                        Cartão
+                    </td>
+
+                    <td th:text="${p.dataPagamento}">
+                        2026-01-01
+                    </td>
+
+                </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <p th:if="${#lists.isEmpty(lista)}"
+           class="empty-state">
+
             Nenhum pagamento registado.
+
         </p>
+
     </section>
-</div>
-<script th:src="@{/js/script.js}"></script>
+
+</main>
+
 </body>
 </html>
