@@ -54,7 +54,7 @@ public class UtilizadorController {
 
         if (utilizador != null) {
             session.setAttribute("utilizadorLogado",utilizador);
-            return "redirect:/";
+            return "redirect:/home";
         }
 
 
