@@ -1,8 +1,10 @@
 package com.gestao.estacionamento.controller;
 
 import com.gestao.estacionamento.model.Pagamento;
+import com.gestao.estacionamento.model.Utilizador;
 import com.gestao.estacionamento.service.PagamentoService;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
@@ -22,7 +24,8 @@ public class PagamentoController {
     }
 
     @GetMapping("/pagamentos")
-    public String listar(Model model) {
+    public String listar(Model model, HttpSession session) {
+            Utilizador utilizador = (Utilizador) session.getAttribute("utilizadorLogado");
 
         model.addAttribute(
                 "lista",
