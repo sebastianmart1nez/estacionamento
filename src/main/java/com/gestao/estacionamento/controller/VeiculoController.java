@@ -19,7 +19,10 @@ public class VeiculoController {
 
     @GetMapping("/veiculos")
     public String listar(Model model, HttpSession session) {
-        Utilizador utilizador = (Utilizador) session.getAttribute("utilizadorLogado");
+        Utilizador user = (Utilizador) session.getAttribute("utilizadorLogado");
+        if (user == null) {
+            return "redirect:/login";
+        }
 
         model.addAttribute("lista", service.listarTodos());
 
