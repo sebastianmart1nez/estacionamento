@@ -17,19 +17,25 @@ public class UtilizadorController {
 
     // abrir página utilizadores
     @GetMapping("/utilizadores")
-    public String abrirPaginaUtilizadores(Model model) {
+    public String abrirPaginaUtilizadores(HttpSession session, Model model) {
+        Utilizador user = (Utilizador) session.getAttribute("utilizadorLogado");
+        if (user == null){
+            return "redirect:/login";
+        }
 
         model.addAttribute("utilizador", new Utilizador());
-
         model.addAttribute("listaUtilizadores",
                 service.listarTodos());
-
         return "utilizadores";
     }
 
     // guardar utilizador
     @PostMapping("/guardarUtilizador")
-    public String guardarUtilizador(Utilizador utilizador) {
+    public String guardarUtilizador(Utilizador utilizador, HttpSession session) {
+        Utilizador user = (Utilizador) session.getAttribute("utilizadorLogado");
+        if (user == null){
+            return "redirect:/login";
+        }
 
         service.guardar(utilizador);
 
