@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservas — ParkSystem</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<main class="container">
+    <header class="page-header">
+        <div>
+            <h1>Reservas de Vagas</h1>
+            <p class="subtitle">Gestão de reservas do parque de estacionamento</p>
+        </div>
+    </header>
+
+    <!-- Formulário apenas para CLIENTES -->
+    <section class="card form-card"
+             th:if="${session.utilizadorLogado.perfil.name() == 'CLIENTE'}">
+        <h3>Nova Reserva</h3>
+        <form action="/reservas" method="post" class="form-inline">
+            <div class="form-group">
+                <label>Número da Vaga</label>
+                <select name="numeroVaga" required>
+                    <option value="" disabled selected>Selecionar vaga</option>
+                    <option th:each="v : ${vagasDisponiveis}"
+                            th:value="${v}"
+                            th:text="'Vaga ' + ${v}"></option>
+                </select>
+            </div>
+            <button type="submit" class="btn-primary">Reservar</button>
+        </form>
+    </section>
+
+    <section class="card">
+        <h3 th:if="${session.utilizadorLogado.perfil.name() == 'CLIENTE'}">As Minhas Reservas</h3>
+        <h3 th:unless="${session.utilizadorLogado.perfil.name() == 'CLIENTE'}">Todas as Reservas</h3>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Email</th>
+                    <th>Vaga</th>
+                    <th>Data/Hora</th>
+                    <th>Estado</th>
+                    <th>Ações</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="r : ${reservas}">
+                    <td th:text="${r.id}"></td>
+                    <td th:text="${r.email}"></td>
+                    <td th:text="'Vaga ' + ${r.numeroVaga}"></td>
+                    <td th:text="${#temporals.format(r.dataReserva, 'dd/MM/yyyy HH:mm')}"></td>
+                    <td>
+                        <span th:if="${r.estado == 'ATIVA'}" class="badge-green">ATIVA</span>
+                        <span th:unless="${r.estado == 'ATIVA'}" class="badge-red" th:text="${r.estado}"></span>
+                    </td>
+                    <td>
+                        <form th:if="${r.estado == 'ATIVA'}"
+                              action="/reservas/cancelar" method="post" style="display:inline"
+                              onsubmit="return confirm('Cancelar esta reserva?')">
+                            <input type="hidden" name="id" th:value="${r.id}">
+                            <button type="submit" class="btn-warning btn-sm">Cancelar</button>
+                        </form>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(reservas)}">
+                    <td colspan="6" class="empty-row">Nenhuma reserva encontrada.</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+</body>
+</html>

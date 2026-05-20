@@ -1,52 +1,77 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="pt">
 <head>
-    <title>Utilizadores</title>
-    <link rel="stylesheet" th:href="@{css/style.css}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utilizadores — ParkSystem</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
-
 <body>
 
-<nav>
-    <a href="/home">Início</a>
-    <a href="/veiculos">Veículos</a>
-    <a href="/pagamentos">Pagamentos</a>
-    <a href="/utilizadores">Utilizadores</a>
-    <a href="/logout">Sair</a>
-</nav>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
 
-<h1>Gestão de Utilizadores</h1>
+<main class="container">
+    <header class="page-header">
+        <div>
+            <h1>Gestão de Utilizadores</h1>
+            <p class="subtitle">Área exclusiva de administração</p>
+        </div>
+        <span class="badge-admin">ADMIN</span>
+    </header>
 
-<form action="/guardarUtilizador" method="post">
-    <input type="text" name="username" placeholder="Nome" required>
-    <input type="email" name="email" placeholder="email" required>
-    <input type="password" name="password" placeholder="Password" required>
+    <section class="card form-card">
+        <h3>Novo Utilizador</h3>
+        <form action="/utilizadores" method="post" class="form-inline">
+            <input type="text" name="nome" placeholder="Nome completo" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="senha" placeholder="Senha" required>
+            <select name="perfil" required>
+                <option value="" disabled selected>Selecionar perfil</option>
+                <option th:each="p : ${perfis}" th:value="${p}" th:text="${p}"></option>
+            </select>
+            <button type="submit" class="btn-primary">Guardar</button>
+        </form>
+    </section>
 
-    <select name="perfil">
-        <option value="ADMIN">ADMIN</option>
-        <option value="FUNCIONARIO">FUNCIONARIO</option>
-        <option value="CLIENTE">CLIENTE</option>
-    </select>
+    <section class="card">
+        <h3>Lista de Utilizadores</h3>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Perfil</th>
+                    <th>Ações</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="u : ${listaUtilizadores}">
+                    <td th:text="${u.id}"></td>
+                    <td th:text="${u.nome}"></td>
+                    <td th:text="${u.email}"></td>
+                    <td>
+                        <span class="badge-perfil" th:text="${u.perfil}"></span>
+                    </td>
+                    <td>
+                        <form th:action="@{/utilizadores/eliminar/{id}(id=${u.id})}"
+                              method="post" style="display:inline"
+                              onsubmit="return confirm('Eliminar este utilizador?')">
+                            <button type="submit" class="btn-danger btn-sm">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(listaUtilizadores)}">
+                    <td colspan="5" class="empty-row">Nenhum utilizador encontrado.</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
 
-    <button type="submit">Guardar</button>
-
-</form>
-
-<table>
-
-    <tr>
-        <th>ID</th>
-        <th>Username</th>
-        <th>Perfil</th>
-    </tr>
-
-    <tr th:each="u : ${listaUtilizadores}">
-        <td th:text="${u.id}"></td>
-        <td th:text="${u.username}"></td>
-        <td th:text="${u.perfil}"></td>
-    </tr>
-
-</table>
+<div th:replace="~{fragments/footer :: footer}"></div>
 
 </body>
 </html>

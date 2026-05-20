@@ -2,9 +2,8 @@ package com.gestao.estacionamento.repository;
 
 import com.gestao.estacionamento.model.Veiculo;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-/**
- * Interface responsável pelo acesso à base de dados.
- */
+@Repository
 public interface VeiculoRepository extends JpaRepository<Veiculo, Long> {
 }

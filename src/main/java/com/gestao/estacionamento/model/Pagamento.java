@@ -1,10 +1,7 @@
 package com.gestao.estacionamento.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+import lombok.*;
 import java.time.LocalDate;
 
 @Entity
@@ -18,16 +15,11 @@ public class Pagamento {
    private Long idPagamento;
 
    private String matricula;
-   private double valor;
+
+   private Double valor;
+
    private LocalDate dataPagamento;
+
    private String metodoPagamento;
-
-
-   @OneToOne
-   @JoinColumn(name = "idEstacionamento")
-   private Estacionamento estacionamento;
-
-   @OneToOne(mappedBy = "pagamento")
-   private Comprovativo comprovativo;
 }
 

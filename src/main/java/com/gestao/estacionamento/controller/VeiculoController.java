@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
+@RequestMapping("/veiculos")
 public class VeiculoController {
 
     private final VeiculoService service;
@@ -17,53 +18,37 @@ public class VeiculoController {
         this.service = service;
     }
 
-    @GetMapping("/veiculos")
+    @GetMapping
     public String listar(Model model, HttpSession session) {
         Utilizador user = (Utilizador) session.getAttribute("utilizadorLogado");
-        if (user == null) {
-            return "redirect:/login";
-        }
+        if (user == null) return "redirect:/login";
 
         model.addAttribute("lista", service.listarTodos());
-
-        model.addAttribute(
-                "vagasDisponiveis",
-                service.getVagasDisponiveis()
-        );
-
-        model.addAttribute(
-                "vagasOcupadas",
-                service.getVagasOcupadas()
-        );
-
-        model.addAttribute(
-                "veiculosHoje",
-                service.getTotalHoje()
-        );
-
-        model.addAttribute(
-                "receitaHoje",
-                service.calcularReceita()
-        );
-
+        model.addAttribute("vagasDisponiveis", service.getVagasDisponiveis());
+        model.addAttribute("vagasOcupadas", service.getVagasOcupadas());
+        model.addAttribute("veiculosHoje", service.getTotalHoje());
+        model.addAttribute("receitaHoje", String.format("%.2f", service.calcularReceita()));
         return "veiculo";
     }
 
-    @PostMapping("/veiculos")
-    public String adicionarVeiculo(
-            @RequestParam String matricula,
-            @RequestParam String horaEntrada
-    ) {
+    @PostMapping
+    public String adicionar(@RequestParam String matricula,
+                            @RequestParam String horaEntrada,
+                            HttpSession session) {
+        Utilizador user = (Utilizador) session.getAttribute("utilizadorLogado");
+        if (user == null) return "redirect:/login";
 
-        Veiculo veiculo = new Veiculo(
-                null,
-                matricula,
-                horaEntrada,
-                null
-        );
-
+        Veiculo veiculo = new Veiculo(null, matricula, horaEntrada, null);
         service.guardar(veiculo);
+        return "redirect:/veiculos";
+    }
 
+    @PostMapping("/eliminar/{id}")
+    public String eliminar(@PathVariable Long id, HttpSession session) {
+        Utilizador user = (Utilizador) session.getAttribute("utilizadorLogado");
+        if (user == null) return "redirect:/login";
+
+        service.eliminar(id);
         return "redirect:/veiculos";
     }
 }

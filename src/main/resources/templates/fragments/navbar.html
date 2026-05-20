@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<nav th:fragment="navbar">
+    <div class="nav-logo">
+        <div class="logo-icon">P</div>
+        <span>ParkSystem</span>
+    </div>
+    <div class="nav-links">
+        <a href="/">Início</a>
+        <a href="/veiculos">Veículos</a>
+        <a href="/reservas">Reservas</a>
+        <a href="/disponibilidades"
+           th:if="${session.utilizadorLogado != null and session.utilizadorLogado.perfil.name() != 'CLIENTE'}">
+            Disponibilidade
+        </a>
+        <a href="/pagamentos">Pagamentos</a>
+        <a href="/utilizadores"
+           th:if="${session.utilizadorLogado != null and session.utilizadorLogado.perfil.name() == 'ADMIN'}">
+            Utilizadores
+        </a>
+    </div>
+    <div class="nav-user" th:if="${session.utilizadorLogado != null}">
+        <span class="user-badge" th:text="${session.utilizadorLogado.perfil.name()}">PERFIL</span>
+        <span class="user-name" th:text="${session.utilizadorLogado.nome}">Nome</span>
+        <a href="/logout" class="btn-logout">Sair</a>
+    </div>
+</nav>
+</body>
+</html>

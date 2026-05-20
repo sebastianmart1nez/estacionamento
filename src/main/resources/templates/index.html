@@ -2,84 +2,89 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="pt">
 <head>
     <meta charset="UTF-8">
-    <title>Gestão de Estacionamentos</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Início — ParkSystem</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
-
 <body>
 
-<!-- NAVBAR -->
-<nav>
-    <div class="nav-logo">
-        <div class="logo">P</div>
-        <span>ParkSystem</span>
-    </div>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
 
-    <div class="nav-links">
-        <a href="/home">Início</a>
-        <a href="/veiculos">Veículos</a>
-        <a href="/pagamentos">Pagamentos</a>
-        <a href="/logout">Sair</a>
-    </div>
-</nav>
-
-<!-- HERO -->
-<section class="hero">
-
-    <div class="hero-content">
-        <h1>Gestão Inteligente de Estacionamento</h1>
-
-        <p>
-            Controle entradas, vagas disponíveis, pagamentos e
-            movimentação de veículos em tempo real.
-        </p>
-
-        <div class="hero-buttons">
-            <a href="/veiculos" class="btn-primary">
-                Gerir Veículos
-            </a>
-
-            <a href="/pagamentos" class="btn-secondary">
-                Ver Pagamentos
-            </a>
+<main class="container">
+    <header class="page-header">
+        <div>
+            <h1>Bem-vindo, <span th:text="${session.utilizadorLogado.nome}">Utilizador</span>!</h1>
+            <p class="subtitle">Painel de controlo do Sistema de Estacionamento</p>
         </div>
-    </div>
+        <span class="badge-perfil" th:text="${session.utilizadorLogado.perfil.name()}">PERFIL</span>
+    </header>
 
-</section>
+    <section class="stats-grid">
+        <div class="stat-card blue">
+            <div class="stat-icon">🚗</div>
+            <div>
+                <p class="stat-label">Veículos</p>
+                <h2 class="stat-value" th:text="${totalVeiculos}">0</h2>
+            </div>
+        </div>
+        <div class="stat-card green">
+            <div class="stat-icon">📋</div>
+            <div>
+                <p class="stat-label">Reservas</p>
+                <h2 class="stat-value" th:text="${totalReservas}">0</h2>
+            </div>
+        </div>
+        <div class="stat-card orange">
+            <div class="stat-icon">€</div>
+            <div>
+                <p class="stat-label">Pagamentos</p>
+                <h2 class="stat-value" th:text="${totalPagamentos}">0</h2>
+            </div>
+        </div>
+    </section>
 
-<!-- CARDS -->
-<section class="cards-section">
-
-    <h2>Funcionalidades</h2>
-
-    <div class="cards">
-
-        <a href="/veiculos" class="card home-card">
-            <div class="icon blue-bg">🚗</div>
-
+    <section class="cards-grid">
+        <a href="/veiculos" class="feature-card">
+            <div class="feature-icon blue-bg">🚗</div>
             <div>
                 <h3>Gerir Veículos</h3>
-                <p>
-                    Registe entradas e saídas dos veículos.
-                </p>
+                <p>Registe entradas e saídas de veículos no parque.</p>
             </div>
         </a>
-
-        <a href="/pagamentos" class="card home-card">
-            <div class="icon green-bg">€</div>
-
+        <a href="/reservas" class="feature-card">
+            <div class="feature-icon green-bg">📋</div>
+            <div>
+                <h3>Reservas</h3>
+                <p>Consulte e gerencie reservas de vagas.</p>
+            </div>
+        </a>
+        <a href="/pagamentos" class="feature-card">
+            <div class="feature-icon orange-bg">€</div>
             <div>
                 <h3>Pagamentos</h3>
-                <p>
-                    Controle pagamentos e receitas do parque.
-                </p>
+                <p>Controle financeiro e histórico de pagamentos.</p>
             </div>
         </a>
+        <a href="/disponibilidades" th:if="${session.utilizadorLogado.perfil.name() != 'CLIENTE'}"
+           class="feature-card">
+            <div class="feature-icon purple-bg">📅</div>
+            <div>
+                <h3>Disponibilidade</h3>
+                <p>Gira a disponibilidade de vagas por horário.</p>
+            </div>
+        </a>
+        <a href="/utilizadores" th:if="${session.utilizadorLogado.perfil.name() == 'ADMIN'}"
+           class="feature-card">
+            <div class="feature-icon red-bg">👤</div>
+            <div>
+                <h3>Utilizadores</h3>
+                <p>Gestão de utilizadores e perfis do sistema.</p>
+            </div>
+        </a>
+    </section>
+</main>
 
-    </div>
-
-</section>
+<div th:replace="~{fragments/footer :: footer}"></div>
 
 </body>
 </html>

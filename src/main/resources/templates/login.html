@@ -2,18 +2,48 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="pt">
 <head>
   <meta charset="UTF-8">
-  <title>Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login — ParkSystem</title>
   <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
-<body>
-<h1>Login</h1>
-<p th:if="${mensagem}"
-   th:text="${mensagem}"
-   class="erro"></p>
-<form action="/login" method="post">
-  <input type="email" name="email" placeholder="Escreva o email" required>
-  <input type="password" name="password" placeholder="Escreva a senha" required>
-  <button type="submit">Entrar</button>
-</form>
+<body class="login-page">
+
+<div class="login-container">
+  <div class="login-card">
+    <div class="login-header">
+      <div class="login-logo">P</div>
+      <h1>ParkSystem</h1>
+      <p>Sistema de Gestão de Estacionamento</p>
+    </div>
+
+    <div class="login-body">
+      <div th:if="${erro}" class="alert alert-erro" th:text="${erro}"></div>
+
+      <form action="/login" method="post" class="login-form">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email"
+                 placeholder="exemplo@gmail.com" required autofocus>
+        </div>
+        <div class="form-group">
+          <label for="senha">Senha</label>
+          <input type="password" id="senha" name="senha"
+                 placeholder="A sua senha" required>
+        </div>
+        <button type="submit" class="btn-primary btn-full">
+          Entrar
+        </button>
+      </form>
+
+      <div class="login-hint">
+        <p><strong>Credenciais de teste:</strong></p>
+        <p>Admin: admin@gmail.com / 1234</p>
+        <p>Func.: func@gmail.com / 1234</p>
+        <p>Cliente: cliente@gmail.com / 1234</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>

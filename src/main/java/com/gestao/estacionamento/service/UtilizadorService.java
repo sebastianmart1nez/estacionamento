@@ -4,7 +4,6 @@ import com.gestao.estacionamento.model.Utilizador;
 import com.gestao.estacionamento.repository.UtilizadorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -13,21 +12,22 @@ public class UtilizadorService {
     @Autowired
     private UtilizadorRepository repository;
 
-    // guardar utilizador
-    public Utilizador guardar(Utilizador utilizador) {
+    public Utilizador salvar(Utilizador utilizador) {
         return repository.save(utilizador);
     }
 
-    // listar utilizadores
-    public List<Utilizador> listarTodos() {
+    public List<Utilizador> listar() {
         return repository.findAll();
     }
 
+    public Utilizador login(String email, String senha) {
+        if (email == null || email.isBlank() || senha == null || senha.isBlank()) {
+            return null;
+        }
+        return repository.findByEmailAndSenha(email, senha).orElse(null);
+    }
 
-
-    // validar login
-    public Utilizador validarLogin(String email, String password) {
-
-        return repository.findByEmail(email,password);
+    public void eliminar(Long id) {
+        repository.deleteById(id);
     }
 }

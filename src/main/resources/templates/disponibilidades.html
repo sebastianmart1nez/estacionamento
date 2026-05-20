@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disponibilidade — ParkSystem</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<main class="container">
+    <header class="page-header">
+        <div>
+            <h1>Disponibilidade de Vagas</h1>
+            <p class="subtitle">Gira os horários e disponibilidade das vagas</p>
+        </div>
+    </header>
+
+    <div th:if="${erro}" class="alert alert-erro" th:text="${erro}"></div>
+
+    <section class="card form-card">
+        <h3>Registar Disponibilidade</h3>
+        <form action="/disponibilidades" method="post" class="form-inline">
+            <div class="form-group">
+                <label>Data</label>
+                <input type="date" name="data" required>
+            </div>
+            <div class="form-group">
+                <label>Hora Início</label>
+                <input type="time" name="horaInicio" required>
+            </div>
+            <div class="form-group">
+                <label>Hora Fim</label>
+                <input type="time" name="horaFim" required>
+            </div>
+            <div class="form-group">
+                <label>Vaga</label>
+                <select name="vaga.id" required>
+                    <option value="" disabled selected>Selecionar vaga</option>
+                    <option th:each="vaga : ${vagas}"
+                            th:value="${vaga.id}"
+                            th:text="${vaga.numero}"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Disponível</label>
+                <select name="disponivel">
+                    <option value="true">Sim</option>
+                    <option value="false">Não</option>
+                </select>
+            </div>
+            <button type="submit" class="btn-primary">Guardar</button>
+        </form>
+    </section>
+
+    <section class="card">
+        <h3>Disponibilidades Registadas</h3>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Data</th>
+                    <th>Hora Início</th>
+                    <th>Hora Fim</th>
+                    <th>Vaga</th>
+                    <th>Disponível</th>
+                    <th>Ações</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="d : ${disponibilidades}">
+                    <td th:text="${d.id}"></td>
+                    <td th:text="${d.data}"></td>
+                    <td th:text="${d.horaInicio}"></td>
+                    <td th:text="${d.horaFim}"></td>
+                    <td th:text="${d.vaga.numero}"></td>
+                    <td>
+                        <span th:if="${d.disponivel}" class="badge-green">Sim</span>
+                        <span th:unless="${d.disponivel}" class="badge-red">Não</span>
+                    </td>
+                    <td>
+                        <form th:action="@{/disponibilidades/eliminar/{id}(id=${d.id})}"
+                              method="post" style="display:inline"
+                              onsubmit="return confirm('Eliminar este registo?')">
+                            <button type="submit" class="btn-danger btn-sm">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(disponibilidades)}">
+                    <td colspan="7" class="empty-row">Nenhuma disponibilidade registada.</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+</body>
+</html>

@@ -1,11 +1,7 @@
 package com.gestao.estacionamento.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import java.util.List;
+import lombok.*;
 
 @Entity
 @Data
@@ -20,7 +16,4 @@ public class Funcionario {
     private String nome;
     private String turno;
     private String contacto;
-
-    @OneToMany
-    private List<Estacionamento> estacionamentos;
 }

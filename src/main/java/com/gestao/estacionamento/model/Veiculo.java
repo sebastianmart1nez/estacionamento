@@ -1,15 +1,8 @@
 package com.gestao.estacionamento.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import java.util.List;
-
-/**
- * Entidade que representa um veículo no sistema.
- */
 @Entity
 @Data
 @NoArgsConstructor
@@ -22,13 +15,7 @@ public class Veiculo {
 
     private String matricula;
 
-    /**
-     * Guardado como String por simplicidade.
-     * Em contexto real, deve ser LocalDateTime.
-     */
     private String horaEntrada;
 
-   @ManyToOne
-    @JoinColumn(name = "idCliente")
-    private Cliente cliente;
+    private String horaSaida;
 }

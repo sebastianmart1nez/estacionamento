@@ -2,22 +2,25 @@ package com.gestao.estacionamento.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import java.io.Serializable;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Utilizador {
+public class Utilizador implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String username;
+    private String nome;
 
+    @Column(unique = true)
     private String email;
 
-    private String password;
+    private String senha;
 
-    private String perfil;
+    @Enumerated(EnumType.STRING)
+    private Perfil perfil;
 }

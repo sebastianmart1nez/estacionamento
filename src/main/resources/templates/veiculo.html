@@ -1,226 +1,104 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="pt">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Gestão de Veículos</title>
-
+    <title>Veículos — ParkSystem</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
-
 <body>
 
-<nav>
-
-    <div class="nav-logo">
-        <div class="logo">P</div>
-        <span>ParkSystem</span>
-    </div>
-
-    <div class="nav-links">
-        <a href="/home">Início</a>
-        <a href="/veiculos" class="active">Veículos</a>
-        <a href="/pagamentos">Pagamentos</a>
-        <a href="/utilizadores">Utilizador</a>
-        <a href="/logout">Sair</a>
-    </div>
-
-</nav>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
 
 <main class="container">
-
-    <header class="header">
-
-        <div class="title-block">
-
-            <div class="logo">🚗</div>
-
-            <div>
-                <h1>Gestão de Estacionamento</h1>
-
-                <p class="subtitle">
-                    Tarifa: 1.50€/hora | Mínimo: 30 minutos
-                </p>
-            </div>
-
+    <header class="page-header">
+        <div>
+            <h1>Gestão de Veículos</h1>
+            <p class="subtitle">Controlo de entradas e saídas</p>
         </div>
-
     </header>
 
-    <section class="grid">
-
-        <article class="card">
-
+    <section class="stats-grid">
+        <div class="stat-card green">
+            <div class="stat-icon">✅</div>
             <div>
-                <p class="label">Vagas Disponíveis</p>
-
-                <h2 class="value green"
-                    th:text="${vagasDisponiveis}">
-                    50
-                </h2>
-
-                <span class="small">
-                    de 50 totais
-                </span>
+                <p class="stat-label">Vagas Disponíveis</p>
+                <h2 class="stat-value" th:text="${vagasDisponiveis}">0</h2>
             </div>
-
-            <div class="icon green-bg">P</div>
-
-        </article>
-
-        <article class="card">
-
+        </div>
+        <div class="stat-card orange">
+            <div class="stat-icon">🚗</div>
             <div>
-                <p class="label">Vagas Ocupadas</p>
-
-                <h2 class="value orange"
-                    th:text="${vagasOcupadas}">
-                    0
-                </h2>
-
-                <span class="small">
-                    Ocupação atual
-                </span>
+                <p class="stat-label">Vagas Ocupadas</p>
+                <h2 class="stat-value" th:text="${vagasOcupadas}">0</h2>
             </div>
-
-            <div class="icon orange-bg">🚗</div>
-
-        </article>
-
-        <article class="card">
-
+        </div>
+        <div class="stat-card blue">
+            <div class="stat-icon">📊</div>
             <div>
-                <p class="label">Veículos Hoje</p>
-
-                <h2 class="value blue"
-                    th:text="${veiculosHoje}">
-                    0
-                </h2>
-
-                <span class="small">
-                    Total processado
-                </span>
+                <p class="stat-label">Veículos Hoje</p>
+                <h2 class="stat-value" th:text="${veiculosHoje}">0</h2>
             </div>
-
-            <div class="icon blue-bg">🕒</div>
-
-        </article>
-
-        <article class="card">
-
+        </div>
+        <div class="stat-card purple">
+            <div class="stat-icon">€</div>
             <div>
-                <p class="label">Receita Total</p>
-
-                <h2 class="value purple"
-                    th:text="${receitaHoje}">
-                    0.00€
-                </h2>
-
-                <span class="small">
-                    Receita diária
-                </span>
+                <p class="stat-label">Receita Estimada</p>
+                <h2 class="stat-value" th:text="${receitaHoje} + '€'">0.00€</h2>
             </div>
-
-            <div class="icon purple-bg">€</div>
-
-        </article>
-
+        </div>
     </section>
 
-    <!-- FORMULÁRIO -->
     <section class="card form-card">
-
-        <div class="section-header">
-            <h3>Registar Entrada</h3>
-
-            <p class="small">
-                Adicione um veículo ao sistema
-            </p>
-        </div>
-
-        <form action="/veiculos"
-              method="post"
-              class="form">
-
-            <input type="text"
-                   name="matricula"
-                   placeholder="Matrícula (00-AA-00)"
-                   required>
-
-            <input type="datetime-local"
-                   name="horaEntrada"
-                   required>
-
-            <button type="submit">
-                Adicionar
-            </button>
-
+        <h3>Registar Entrada de Veículo</h3>
+        <form action="/veiculos" method="post" class="form-inline">
+            <div class="form-group">
+                <label>Matrícula</label>
+                <input type="text" name="matricula" placeholder="00-AA-00" required>
+            </div>
+            <div class="form-group">
+                <label>Hora de Entrada</label>
+                <input type="datetime-local" name="horaEntrada" required>
+            </div>
+            <button type="submit" class="btn-primary">Registar</button>
         </form>
-
     </section>
 
-    <!-- TABELA -->
-    <section class="card tabela-card">
-
-        <div class="section-header">
-
-            <div>
-                <h3>Veículos Registados</h3>
-
-                <p class="small">
-                    Lista de veículos atualmente estacionados
-                </p>
-            </div>
-
-        </div>
-
+    <section class="card">
+        <h3>Veículos Registados</h3>
         <div class="table-responsive">
-
             <table class="table">
-
                 <thead>
                 <tr>
                     <th>ID</th>
                     <th>Matrícula</th>
                     <th>Hora de Entrada</th>
+                    <th>Ações</th>
                 </tr>
                 </thead>
-
                 <tbody>
-
-                <tr th:each="veiculo : ${lista}">
-
-                    <td th:text="${veiculo.id}">1</td>
-
-                    <td th:text="${veiculo.matricula}">
-                        00-AA-00
+                <tr th:each="v : ${lista}">
+                    <td th:text="${v.id}"></td>
+                    <td th:text="${v.matricula}"></td>
+                    <td th:text="${v.horaEntrada}"></td>
+                    <td>
+                        <form th:action="@{/veiculos/eliminar/{id}(id=${v.id})}"
+                              method="post" style="display:inline"
+                              onsubmit="return confirm('Remover este veículo?')">
+                            <button type="submit" class="btn-danger btn-sm">Remover</button>
+                        </form>
                     </td>
-
-                    <td th:text="${veiculo.horaEntrada}">
-                        2026-05-11T10:00
-                    </td>
-
                 </tr>
-
                 <tr th:if="${#lists.isEmpty(lista)}">
-
-                    <td colspan="3" class="empty-table">
-                        Nenhum veículo registado
-                    </td>
-
+                    <td colspan="4" class="empty-row">Nenhum veículo registado.</td>
                 </tr>
-
                 </tbody>
-
             </table>
-
         </div>
-
     </section>
-
 </main>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
 
 </body>
 </html>
